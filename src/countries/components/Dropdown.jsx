@@ -1,10 +1,17 @@
 import { useState } from "react";
 
-export const Dropdown = () => {
+export const Dropdown = ({onDropdown}) => {
 const [dropDown, setDropDown] = useState(false);
+
 
 const isOpen = () =>{
     setDropDown(!dropDown)
+}
+
+const getValueDropdown = (evt) => {
+  evt.preventDefault();
+  const value = evt.target.innerText; 
+  onDropdown(value);
 }
   return (
     <div className="relative">
@@ -34,6 +41,7 @@ const isOpen = () =>{
       </button>
       {/* <!-- Dropdown menu --> */}
       <div
+        onClick={ getValueDropdown }
         id="dropdown"
         className= {`${dropDown ? 'block' : 'hidden'} "z-10 w-44 bg-slate-700 my-2 rounded divide-y divide-gray-100 shadow dark:bg-gray-700 absolute top-0"`}
       >
