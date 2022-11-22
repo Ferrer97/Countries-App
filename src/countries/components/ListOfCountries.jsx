@@ -1,8 +1,15 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const ListOfCountries = ({ country }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`${country.alpha3Code}`);
+  };
   return (
-    <div className="rounded overflow-hidden shadow-lg max-w-xs xl:max-w-4xl mx-auto">
+    <div
+      onClick={handleClick}
+      className="rounded overflow-hidden shadow-lg max-w-xs xl:max-w-4xl mx-auto"
+    >
       <img
         className="max-w-[100%] w-full sm:w-[280px] sm:h-[180px]"
         src={country.flag}
