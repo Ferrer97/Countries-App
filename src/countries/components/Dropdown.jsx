@@ -1,96 +1,32 @@
-import { useState } from "react";
-
-export const Dropdown = ({onDropdown}) => {
-const [dropDown, setDropDown] = useState(false);
-
-
-const isOpen = () =>{
-    setDropDown(!dropDown)
-}
-
-const getValueDropdown = (evt) => {
-  evt.preventDefault();
-  const value = evt.target.innerText; 
-  onDropdown(value);
-}
+export const Dropdown = ({ onDropdown }) => {
+  const getValueDropdown = (evt) => {
+    evt.preventDefault();
+    const value = evt.target.value;
+    if (value === "") return;
+    onDropdown(value);
+  };
   return (
-    <div className="relative">
-      <button
-        onClick={isOpen}
-        id="dropdownDefault"
-        data-dropdown-toggle="dropdown"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-44"
-        type="button"
+    <>
+      <label
+        htmlFor="countries"
+        className="sr-only"
       >
-        Filter by Region{" "}
-        <svg
-          className="ml-2 w-4 h-4"
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 9l-7 7-7-7"
-          ></path>
-        </svg>
-      </button>
-      {/* <!-- Dropdown menu --> */}
-      <div
-        onClick={ getValueDropdown }
-        id="dropdown"
-        className= {`${dropDown ? 'block' : 'hidden'} "z-10 w-44 bg-slate-700 my-2 rounded divide-y divide-gray-100 shadow dark:bg-gray-700 absolute top-0"`}
+        Filter by Region
+      </label>
+      <select
+        onChange={getValueDropdown}
+        id="countries"
+        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
       >
-        <ul
-          className="py-1 text-sm text-gray-700 dark:text-gray-200"
-          aria-labelledby="dropdownDefault"
-        >
-          <li>
-            <a
-              href="#"
-              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Africa
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              America
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Asia
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Europe
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Oceania
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
+        <option desabled="true" value="">
+          Choose a Region
+        </option>
+        <option value="africa">Africa</option>
+        <option value="america">América</option>
+        <option value="asia">Asia</option>
+        <option value="europe">Europe</option>
+        <option value="oceania">Oceania</option>
+      </select>
+    </>
   );
 };

@@ -1,6 +1,19 @@
-export const Search = () => {
+import { useState } from "react";
+
+export const Search = ({ onSearch }) => {
+  const [search, setSearch] = useState("");
+
+  const onChangeInput = (evt) => {
+    const value = evt.target.value;
+    setSearch(value);
+  };
+
+  const handleSumit = (evt) => {
+    evt.preventDefault();
+    onSearch(search);
+  };
   return (
-    <form className="flex items-center w-full">
+    <form onSubmit={handleSumit} className="flex items-center w-full">
       <label htmlFor="simple-search" className="sr-only">
         Search
       </label>
@@ -26,6 +39,7 @@ export const Search = () => {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Search for a country..."
           required
+          onChange={onChangeInput}
         />
       </div>
     </form>

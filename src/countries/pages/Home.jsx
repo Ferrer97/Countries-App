@@ -1,40 +1,43 @@
 import { useState, useEffect } from "react";
-import { Dropdown } from "../components/Dropdown";
-import { ListOfCountries } from "../components/ListOfCountries";
-import { Search } from "../components/Search";
+import { Dropdown, ListOfCountries, Search } from "../components";
 
 export const Home = () => {
-  const [dropDownValue, setDropDownValue] = useState("");
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("https://restcountries.com/v2/all")
+    fetch("https://restcountries.com/v3.1/all")
       .then((request) => request.json())
       .then((resp) => {
         setData(resp);
       });
   }, []);
 
-  const onDropdown = (value) => {
-    setDropDownValue(value);
+  const onDropdown = async (value) => {
+    const req = await fetch(`https://restcountries.com/v3.1/region/${value}`);
+    const resp = await req.json();
+    setData(resp);
+  };
+
+  const onSearch = async (value) => {
+    value = value.toLowerCase();
+    if (value < 2 || value === "") return;
+    const req = await fetch(`https://restcountries.com/v3.1/name/${value}`);
+    const resp = await req.json();
+    setData(resp);
   };
 
   return (
-    <>
-      <header className="bg-gray-700 p-6 flex justify-between items-center">
-        <p className="text-white font-medium text-lg">where in the world?</p>
-        <p className="text-white font-light text-lg">Dark Mode &#9789; </p>
-      </header>
+    <div className="bg-white-700 dark:bg-slate-800 min-h-full">
       <div className="flex flex-col items-center max-w-2xl md:flex-row lg:max-w-4xl lg:mx-auto">
-        <Search />
+        <Search onSearch={onSearch} />
         <Dropdown onDropdown={onDropdown} />
       </div>
 
-      <main className="w-[95%] grid place-content-center sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto mt-5">
+      <main className="w-[95%] grid min-h-screen sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto mt-5 overflow-hidden">
         {data.map((country) => (
-          <ListOfCountries key={country.alpha3Code} country={country} />
+          <ListOfCountries key={country.cca3} country={country} />
         ))}
       </main>
-    </>
+    </div>
   );
 };
