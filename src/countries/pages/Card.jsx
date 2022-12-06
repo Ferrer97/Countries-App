@@ -16,7 +16,7 @@ export const Card = () => {
 
   const element = data.find((countries) => countries.cca3 === id);
   const handleClick = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   const hasBorders = () => {

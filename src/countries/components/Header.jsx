@@ -21,7 +21,7 @@ export const Header = () => {
   };
 
   const handleClick = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   return (

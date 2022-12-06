@@ -7,11 +7,11 @@ export const AppRouter = () => {
     <>
       <Header />
       <Routes>
-        <Route path="home" element={<Home />} />
+        <Route path="/" element={<Home />} />
 
-        <Route path="home/:id" element={<Card />} />
+        <Route path="/:id" element={<Card />} />
 
-        <Route path="/" element={<Navigate to="/home" />}></Route>
+        <Route path="*" element={<Navigate to="/home" />}></Route>
       </Routes>
     </>
   );
