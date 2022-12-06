@@ -11,7 +11,7 @@ export const AppRouter = () => {
 
         <Route path="/:id" element={<Card />} />
 
-        <Route path="*" element={<Navigate to="/" />}></Route>
+        <Route path="*" element={<Navigate to="/home" />}></Route>
       </Routes>
     </>
   );
