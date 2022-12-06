@@ -8,7 +8,7 @@ export const ListOfCountries = ({ country }) => {
   return (
     <div
       onClick={handleClick}
-      className="rounded overflow-hidden shadow-lg max-w-xs xl:max-w-4xl mx-auto"
+      className="rounded overflow-hidden shadow-lg max-w-xs xl:max-w-4xl mx-auto cursor-pointer"
     >
       <img
         className="max-w-[100%] w-full sm:w-[280px] sm:h-[180px]"
